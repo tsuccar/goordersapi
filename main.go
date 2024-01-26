@@ -5,20 +5,27 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
 	"github.com/joho/godotenv"
 )
 
 func main() {
-	godotenv.Load(".env")
 
+	//Port
+	godotenv.Load(".env")
 	port := os.Getenv("PORT")
 	if port == "" {
 		log.Fatal("PORT environment variable is not set")
 	}
-  
+	//Chi Router
+	router := chi.NewRouter()
+	router.Use(middleware.Logger)
+	router.Get("/hello", basicHandler)
+	router.Post("/hello", basicHandler)
 	server := &http.Server{
 		Addr:    ":" + port,
-		Handler: http.HandlerFunc(basicHandler),
+		Handler: router,
 	}
 
 
