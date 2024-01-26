@@ -1,0 +1,12 @@
+services:
+  golang: #docker run --name ginbhttp --rm -p 8080:8080 gin-app:1.0 bash
+    container_name: goordersapi
+    image: gin-app:1.0
+    build:
+      context: .
+    stdin_open: true
+    tty: true
+    ports:
+      - 8081:8081
+    volumes:
+      - .:/workspace

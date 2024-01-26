@@ -1,0 +1,66 @@
+{
+    "name": "goordersapi",
+    "dockerComposeFile": "../docker-compose.yml",
+    "service": "golang",
+    "workspaceFolder": "/workspace",
+    "features": {
+        "ghcr.io/devcontainers/features/common-utils:2": {
+            "installZsh": true,
+            "installOhMyZsh": true,
+            "installOhMyZshConfig": true,
+            "upgradePackages": true,
+            "username": "automatic",
+            "userUid": "automatic",
+            "userGid": "automatic"
+        }
+    },
+    "forwardPorts": [
+        8081
+    ],
+    "portsAttributes": {
+        "8081": {
+            "label": "App",
+            "onAutoForward": "notify"
+        },
+        "5678": {
+            "label": "Deubg",
+            "onAutoForward": "notify"
+        }
+    },
+    "customizations": {
+        // Configure properties specific to VS Code.
+        "vscode": {
+            // Set *default* container specific settings.json values on container create.
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "zsh",
+                "terminal.integrated.profiles.linux": {
+                    "bash": {
+                        "path": "bash",
+                        "icon": "terminal-bash"
+                    },
+                    "zsh": {
+                        "path": "zsh"
+                    },
+                    "fish": {
+                        "path": "fish"
+                    },
+                    "tmux": {
+                        "path": "tmux",
+                        "icon": "terminal-tmux"
+                    },
+                    "pwsh": {
+                        "path": "pwsh",
+                        "icon": "terminal-powershell"
+                    }
+                }
+            },
+            "extensions": [
+                "golang.go",
+                "humao.rest-client",
+                "rangav.vscode-thunder-client",
+                "ms-azuretools.vscode-docker"
+            ]
+        }
+    },
+    "remoteUser": "golang-app"
+}
