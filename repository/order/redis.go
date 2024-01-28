@@ -8,7 +8,7 @@ import (
 
 	"github.com/redis/go-redis/v9"
 
-	"github.com/tsuccar/goordersapi/model"
+	"github.com/dreamsofcode-io/orders-api/model"
 )
 
 type RedisRepo struct {
@@ -40,7 +40,8 @@ func (r *RedisRepo) Insert(ctx context.Context, order model.Order) error {
 
 	// set command can also overwrite existing data, so we will use
 	// setNX - NX not exist.
-	res := txn.SetNX(ctx, key, string(data), 0) //byte array to string
+
+	res := txn.SetNX(ctx, key, string(data), 0)
 	if err := res.Err(); err != nil {
 		txn.Discard()
 		return fmt.Errorf("failed to set: %w", err)

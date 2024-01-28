@@ -16,13 +16,14 @@ type App struct {
 
 func New() *App {
 	app := &App{
-		router: loadRoutes(), //*chi.mux object implements http.Handler interface
+
 		rdb: redis.NewClient(&redis.Options{
 			Addr:     "goordersapi-redis-1:6379", //make sure to use docker networks hostname
 			Password: "",                         // no password set
 			DB:       0,                          // use default DB
 		}), //the client manages the connection state internally
 	}
+	app.loadRoutes()
 	return app
 }
 
