@@ -3,6 +3,8 @@ package main
 import (
 	"context"
 	"fmt"
+	"os"
+	"os/signal"
 
 	"github.com/tsuccar/goordersapi/application"
 )
@@ -15,11 +17,11 @@ func main() {
 	//a new context from,only in main (), initialization and test.
 	//os.Interrupt provides the system SIGINT interrupt
 
-	// ctx, cancel := signal.NotifyContext(context.Background(), os.Interrupt)
-	// defer cancel() //cancel all derived context and any children underneath it.
+	ctx, cancel := signal.NotifyContext(context.Background(), os.Interrupt)
+	defer cancel() //cancel all derived context and any children underneath it.
 
 	// err := app.Start(ctx)
-	err := app.Start(context.TODO()) //blocking
+	err := app.Start(ctx) //blocking
 	if err != nil {
 		fmt.Println("failed to start app:", err)
 	}
