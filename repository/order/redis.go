@@ -8,7 +8,7 @@ import (
 
 	"github.com/redis/go-redis/v9"
 
-	"github.com/dreamsofcode-io/orders-api/model"
+	"github.com/tsuccar/goordersapi/model"
 )
 
 type RedisRepo struct {

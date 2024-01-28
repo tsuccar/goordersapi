@@ -11,7 +11,7 @@ import (
 
 func main() {
 
-	app := application.New()
+	app := application.New(application.LoadConfig())
 	//creating our own interrupt that will respond to interrupt signal
 	// context.Background()- used as root level cascader of interruptions, and to derive
 	//a new context from,only in main (), initialization and test.

@@ -12,16 +12,18 @@ import (
 type App struct {
 	router http.Handler
 	rdb    *redis.Client
+	config Config
 }
 
-func New() *App {
+func New(config Config) *App {
 	app := &App{
 
 		rdb: redis.NewClient(&redis.Options{
-			Addr:     "goordersapi-redis-1:6379", //make sure to use docker networks hostname
-			Password: "",                         // no password set
-			DB:       0,                          // use default DB
+			Addr:     config.RedisAddress, //make sure to use docker networks hostname
+			Password: "",                  // no password set
+			DB:       0,                   // use default DB
 		}), //the client manages the connection state internally
+		config: config,
 	}
 	app.loadRoutes()
 	return app
@@ -29,7 +31,7 @@ func New() *App {
 
 func (a *App) Start(ctx context.Context) error {
 	server := &http.Server{
-		Addr:    ":8081",
+		Addr:    fmt.Sprintf(":%d", a.config.ServerPort),
 		Handler: a.router,
 	}
 
