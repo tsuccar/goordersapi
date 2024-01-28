@@ -24,9 +24,10 @@ func loadRoutes() *chi.Mux {
 
 func loadOrderRoutes(router chi.Router) {
 	orderHandler := &handler.Order{}
-	router.Post("/", orderHandler.Create)//it satisfies 'http.handlerFunc' type,this is not interface requirement
+
+	router.Post("/", orderHandler.Create) //it satisfies 'http.handlerFunc' type,this is not interface requirement
 	router.Get("/", orderHandler.List)
 	router.Get("/{id}", orderHandler.GetByID)
 	router.Put("/{id}", orderHandler.UpdateByID)
-  router.Delete("/{id}", orderHandler.DeleteByID)
+	router.Delete("/{id}", orderHandler.DeleteByID)
 }
