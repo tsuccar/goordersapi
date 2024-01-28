@@ -1,5 +1,5 @@
 {
-    "name": "goordersapi",
+    "name": "goordersapi & Redis",
     "dockerComposeFile": "../docker-compose.yml",
     "service": "golang",
     "workspaceFolder": "/workspace",
@@ -15,7 +15,9 @@
         }
     },
     "forwardPorts": [
-        8081
+        8081,
+        5678,
+        6379
     ],
     "portsAttributes": {
         "8081": {
@@ -24,6 +26,10 @@
         },
         "5678": {
             "label": "Deubg",
+            "onAutoForward": "notify"
+        },
+        "6379": {
+            "label": "Redis",
             "onAutoForward": "notify"
         }
     },

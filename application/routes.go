@@ -1,7 +1,6 @@
 package application
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
@@ -25,7 +24,6 @@ func loadRoutes() *chi.Mux {
 
 func loadOrderRoutes(router chi.Router) {
 	orderHandler := &handler.Order{}
-	fmt.Printf("The of  orderHandler.List is : %T \n ",  orderHandler.List)
 	router.Post("/", orderHandler.Create)//it satisfies 'http.handlerFunc' type,this is not interface requirement
 	router.Get("/", orderHandler.List)
 	router.Get("/{id}", orderHandler.GetByID)
